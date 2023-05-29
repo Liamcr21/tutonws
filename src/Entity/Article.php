@@ -4,9 +4,10 @@ namespace App\Entity;
 
 use App\Model\TimestampedInterface;
 use App\Repository\ArticleRepository;
+use Doctrine\DBAL\Types\Types;
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ArticleRepository::class)]
@@ -29,11 +30,11 @@ class Article implements TimestampedInterface
     #[ORM\Column(length: 100, nullable: true)]
     private ?string $featuredText = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $createdAt = null;
+    #[ORM\Column(type: 'datetime')]
+    private ?\DateTimeInterface $createdAt;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $updatedAt = null;
+    #[ORM\Column(type: 'datetime', nullable: true)]
+    private ?\DateTimeInterface $updatedAt;
 
     #[ORM\ManyToMany(targetEntity: Category::class, mappedBy: 'articles')]
     private Collection $categories;
@@ -48,6 +49,7 @@ class Article implements TimestampedInterface
     {
         $this->categories = new ArrayCollection();
         $this->comments = new ArrayCollection();
+        $this->createdAt = new \DateTime(); // Initialiser createdAt avec la date et l'heure actuelles
     }
 
     public function getId(): ?int

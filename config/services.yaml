@@ -28,3 +28,8 @@ services:
 
     EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator:
         autowire: true
+
+    App\EventSubscriber\EventSubscriber:
+        autowire: true
+
+    # Other services...

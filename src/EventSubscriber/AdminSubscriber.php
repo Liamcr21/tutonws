@@ -2,40 +2,46 @@
 
 namespace App\EventSubscriber;
 
-use App\Model\TimestampedInterface;
+use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityPersistedEvent;
 use EasyCorp\Bundle\EasyAdminBundle\Event\BeforeEntityUpdatedEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use App\Model\TimestampedInterface;
 
-class EasyAdminSubscriber implements EventSubscriberInterface
+class EventSubscriber implements EventSubscriberInterface
 {
-    public static function getSubscribedEvents(): array
+    private EntityManagerInterface $entityManager;
+
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
+    public static function getSubscribedEvents()
     {
         return [
-            BeforeEntityPersistedEvent::class => ['setEntityCreatedAt'],
-            BeforeEntityUpdatedEvent::class => ['setEntityUpdatedAt'],
+            BeforeEntityPersistedEvent::class => 'setEntityCreatedAt',
+            BeforeEntityUpdatedEvent::class => 'setEntityUpdatedAt',
         ];
     }
 
     public function setEntityCreatedAt(BeforeEntityPersistedEvent $event)
     {
-       $entity = $event->getEntityInstance();
+        $entity = $event->getEntityInstance();
 
-       if (!$entity instanceof TimestampedInterface) {
-           return;
-       }
-
-       $entity->setCreatedAt(new \DateTime());
+        if ($entity instanceof TimestampedInterface) {
+            $entity->setCreatedAt(new \DateTime());
+        }
     }
 
     public function setEntityUpdatedAt(BeforeEntityUpdatedEvent $event)
     {
         $entity = $event->getEntityInstance();
 
-        if (!$entity instanceof TimestampedInterface) {
-            return;
-        }
+        if ($entity instanceof TimestampedInterface) {
+            $entity->setUpdatedAt(new \DateTime());
 
-        $entity->setUpdatedAt(new \DateTime());
+            $this->entityManager->flush();
+        }
     }
 }
