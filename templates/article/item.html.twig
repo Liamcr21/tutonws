@@ -1,0 +1,21 @@
+{% set article_show = path('article_show', { 'slug': article.slug }) %}
+<article class="mb-5">
+    <div class="row">
+        <div class="col-md-5">
+            {% if article.featuredImages %}
+                <a href="{{article_show}}">
+                    <img src="/uploads/{{ article.featuredImages.filename }}" alt="{{ article.featuredImages.altText }}" loading="lazy" width="350" height="205" >
+                </a>
+            {% endif %}
+        </div>
+        <div class="col-md-7">
+            <h2>
+                <a href="{{ article_show }}" class="text-decoration-none">{{ article.title }}</a>
+            </h2>
+            <p>
+                {{ article.createdAt|date('d M Y') }} </b>
+            </p>
+            {{ article.featuredText ?: article.content|striptags|slice(0, 130) ~ '...' }}
+        </div>
+    </div>
+</article>
