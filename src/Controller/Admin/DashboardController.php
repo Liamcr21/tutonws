@@ -39,18 +39,20 @@ class DashboardController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('Tutonws');
+            ->setTitle('OpenNWS Admin');
     }
 
     public function configureMenuItems(): iterable
     {
-        yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
+        yield MenuItem::linkToRoute('Retour sur le site', 'fa fa-undo', 'app_home');
 
-         yield MenuItem::subMenu('Article', 'fas fa-newpaper')->setSubItems([
+        yield MenuItem::subMenu('Article', 'fas fa-newspaper')->setSubItems([
             MenuItem::linkToCrud('Tous les articles', 'fa fa-newspaper', Article::class),
             MenuItem::linkToCrud('Ajouter un article', 'fa fa-plus', Article::class)->setAction(Crud::PAGE_NEW),
             MenuItem::linkToCrud('Catégories', 'fa fa-list', Category::class),
-
          ]);
+
+        yield MenuItem::linkToCrud('Commentaires', 'fa fa-comment', Comment::class);
+
     }
 }
