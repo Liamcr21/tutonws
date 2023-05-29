@@ -3,8 +3,7 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>
-			{% block title %}Blog NWS
-			{% endblock %}
+			{% block title %}OpenNWS{% endblock %}
 		</title>
 		<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
 		{% block stylesheets %}
@@ -31,7 +30,7 @@
         <div class="collapse navbar-collapse" id="navbarsExample07">
           <ul class="navbar-nav mr-auto">  
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="dropdown07" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mon blog</a>
+              <a class="nav-link dropdown-toggle" href="#" id="dropdown07" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Gestion</a>
               <div class="dropdown-menu" aria-labelledby="dropdown07">
                 <a class="dropdown-item" href="{{ path('admin')}}">Tableau de bord</a>
                 <a class="dropdown-item" href="#">Menu</a>
@@ -56,7 +55,7 @@
 <div class="container">
     <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
         <a class="d-flex align-items-center mb-3 mb-0 me-md-auto text-dark text-decoration-none"  href="{{ path ('app_home')}}">
-            <span class="fs-4">Tuto NWS</span>
+            <span class="fs-4">OpenNWS</span>
         </a>
 
             <ul class="nav nav-pills">
