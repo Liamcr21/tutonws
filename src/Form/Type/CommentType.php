@@ -2,10 +2,14 @@
 
 namespace App\Form\Type;
 
+use App\Entity\Article;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\CallbackTransformer;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
-
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class CommentType extends AbstractType
 {
@@ -14,7 +18,23 @@ class CommentType extends AbstractType
        $builder
        ->add('content', TextareaType::class, [
         'label' => 'Votre message',
-       ]) ;
+       ])
+       ->add('article', HiddenType::class)
+       ->add('send', SubmitType::class, [
+        'label' => 'Envoyer',
+       ]);
+
+       $builder->get('article')
+       ->addModelTransformer(new CallbackTransformer(
+        fn (Article $article) => $article->getId(),
+        fn (Article $article) => $article->getTitle()
+       ));
     }
 
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaultS([
+            'data_class' => Comment::class,
+        ]);
+    }
 }
