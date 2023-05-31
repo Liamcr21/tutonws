@@ -45,10 +45,9 @@ class DashboardController extends AbstractDashboardController
             MenuItem::linkToCrud('Tous les articles', 'fa fa-newspaper', Article::class),
             MenuItem::linkToCrud('Ajouter un article', 'fa fa-plus', Article::class)->setAction(Crud::PAGE_NEW),
             MenuItem::linkToCrud('Catégories', 'fa fa-list', Category::class),
-         ]);
+        ]);
 
         yield MenuItem::linkToCrud('Commentaires', 'fa fa-comment', Comment::class);
 
     }
 }
-    
