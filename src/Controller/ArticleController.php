@@ -19,12 +19,11 @@ class ArticleController extends AbstractController
 
         $comment = new Comment($article);
 
-
         $commentForm = $this->createForm(CommentType::class, $comment);
         
         return $this->renderForm('article/show.html.twig', [
             'article' => $article,
-            'commentForm' => $commentForm
+            'commentForm' => $commentForm 
         ]);
     }
 }
