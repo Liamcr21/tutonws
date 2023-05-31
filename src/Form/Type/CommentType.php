@@ -3,6 +3,7 @@
 namespace App\Form\Type;
 
 use App\Entity\Article;
+use App\Entity\Comment;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -35,6 +36,7 @@ class CommentType extends AbstractType
     {
         $resolver->setDefaultS([
             'data_class' => Comment::class,
+            'csrf_token_id' => 'comment_add',   
         ]);
     }
 }

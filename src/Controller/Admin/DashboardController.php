@@ -5,11 +5,6 @@ namespace App\Controller\Admin;
 use App\Entity\Article;
 use App\Entity\Category;
 use App\Entity\Comment;
-use App\Entity\Media;
-use App\Entity\Menu;
-use App\Entity\Option;
-use App\Entity\Page;
-use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -56,3 +51,4 @@ class DashboardController extends AbstractDashboardController
 
     }
 }
+    
