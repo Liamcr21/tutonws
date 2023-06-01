@@ -4,7 +4,15 @@
         <div class="col-md-{{ leftCol ?? 5}}">
             {% if article.featuredImages %}
                 <a href="{{article_show}}">
-                    <img src="/uploads/{{ article.featuredImages.filename }}" alt="{{ article.featuredImages.altText }}" loading="lazy" width="350" height="205" >
+{% if article.featuredImages.filename ends with '.mp4' %}
+  <video controls width="350" height="205">
+    <source src="/uploads/{{ article.featuredImages.filename }}" type="video/mp4">
+    Votre navigateur ne prend pas en charge la lecture de vidéos.
+  </video>
+{% else %}
+  <img src="/uploads/{{ article.featuredImages.filename }}" alt="{{ article.featuredImages.altText }}" loading="lazy" width="350" height="205">
+{% endif %}
+
                 </a>
             {% endif %}
         </div>
