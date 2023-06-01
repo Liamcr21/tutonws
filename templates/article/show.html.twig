@@ -8,6 +8,14 @@
 <h1>{{ article.title }} </h1>
 <hr>
 <p>{{ article.content|raw}}</p>
+{% if article.featuredImages.filename ends with '.mp4' %}
+  <video controls width="100%" height="100%">
+    <source src="/uploads/{{ article.featuredImages.filename }}" type="video/mp4">
+    Votre navigateur ne prend pas en charge la lecture de vidéos.
+  </video>
+{% else %}
+  <img src="/uploads/{{ article.featuredImages.filename }}" alt="{{ article.featuredImages.altText }}" loading="lazy" width="350" height="205">
+{% endif %}
  <h2 class="comments-title mt-5"><span id="comment-count">{{ article.comments|length }}</span> commentaire(s)</h2>
   <hr>
 
