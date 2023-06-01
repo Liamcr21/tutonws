@@ -23,6 +23,7 @@
 
 	</head>
 	<body>
+	{% if is_granted('ROLE_AUTHOR') %}
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 			<div class="container">
 				<a class="navbar-brand" href="#">Admin</a>
@@ -36,7 +37,9 @@
 							<a class="nav-link dropdown-toggle" href="#" id="dropdown07" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Gestion</a>
 							<div class="dropdown-menu" aria-labelledby="dropdown07">
 								<a class="dropdown-item" href="{{ path('admin')}}">Tableau de bord</a>
+									{% if is_granted('ROLE_ADMIN') %}
 								<a class="dropdown-item" href="{{ ea_admin_url('MenuCrudController')}}">Menu</a>
+								{% endif %}
 							</div>
 						</li>
 					</ul>
@@ -54,6 +57,7 @@
 				</div>
 			</div>
 		</nav>
+		{% endif %}
 
 		<div class="container">
 			<header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
